@@ -30,6 +30,8 @@ namespace MassGraves
             }
         }
 
+        private int remainingLifeTime = 1800000;
+
         public override bool Accepts(Thing thing)
         {
             // CanAcceptAnyOf is from Building_Casket.cs which is too far up the inheritance tree to call directly
@@ -67,6 +69,19 @@ namespace MassGraves
                     yield return giz;
                 }
             }
+        }
+
+        public override void TickRare()
+        {
+            base.TickRare();
+            remainingLifeTime -= GenTicks.TickRareInterval;
+            if (remainingLifeTime <= 0) Destroy();
+        }
+
+        public override void ExposeData()
+        {
+            base.ExposeData();
+            Scribe_Values.Look(ref remainingLifeTime, "remainingLifeTime");
         }
     }
 }

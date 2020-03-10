@@ -2,13 +2,15 @@
 <ModMetaData>
 	<name>[1.0] Mass Graves</name>
 	<author>NoImageAvailable</author>
-	<targetVersion>1.0.2059</targetVersion>
-	<description>[h1][1.0]Mass Graves[/h1]
+	<supportedVersions>
+		<li>1.0</li>
+	</supportedVersions>
+	<description>[h1][1.0] Mass Graves[/h1]
 
 Adds mass graves to allow easier disposing of raider corpses.
 
 Original author is NoImageAvailable
-Some changes in code and update to B18 by Kartel' and update to B19/1.0 by Pyrce
+Some changes in code and update to B18 by Kartel' and B19/1.0/1.1 by Pyrce
 
 [url=https://ludeon.com/forums/index.php?topic=33128.msg337601#msg337601]Non-steam official version[/url] (by NoImageAvailable)
 [url=https://github.com/MSeal/MassGraves/archive/master.zip]Non-steam B19/1.0 port[/url] (by Pyrce)
