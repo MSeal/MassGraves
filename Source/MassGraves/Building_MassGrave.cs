@@ -13,7 +13,7 @@ namespace MassGraves
         public bool CanAcceptCorpses => CorpseCount < Controller.settings.CorpseCapacity;
 
         // Overwrite this so we can have multiple pawns putting corpses in graves
-        public new int MaxAssignedPawnsCount
+        public int MaxAssignedPawnsCount
         {
             get
             {
@@ -30,12 +30,34 @@ namespace MassGraves
             }
         }
 
-        private int remainingLifeTime = 1800000;
-
         public override bool Accepts(Thing thing)
         {
             // CanAcceptAnyOf is from Building_Casket.cs which is too far up the inheritance tree to call directly
-            return this.innerContainer.CanAcceptAnyOf(thing, true) && this.GetStoreSettings().AllowedToAccept(thing) && CanAcceptCorpses;
+            if (!this.innerContainer.CanAcceptAnyOf(thing))
+            {
+                return false;
+            }
+            else if (!CanAcceptCorpses)
+            {
+                return false;
+            }
+            else if (AssignedPawn != null)
+            {
+                Corpse corpse = thing as Corpse;
+                if (corpse == null)
+                {
+                    return false;
+                }
+                if (corpse.InnerPawn != AssignedPawn)
+                {
+                    return false;
+                }
+            }
+            else if (!GetStoreSettings().AllowedToAccept(thing))
+            {
+                return false;
+            }
+            return true;
         }
 
         public override string GetInspectString()
@@ -69,19 +91,6 @@ namespace MassGraves
                     yield return giz;
                 }
             }
-        }
-
-        public override void TickRare()
-        {
-            base.TickRare();
-            remainingLifeTime -= GenTicks.TickRareInterval;
-            if (remainingLifeTime <= 0) Destroy();
-        }
-
-        public override void ExposeData()
-        {
-            base.ExposeData();
-            Scribe_Values.Look(ref remainingLifeTime, "remainingLifeTime");
         }
     }
 }

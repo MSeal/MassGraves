@@ -1,6 +1,6 @@
 ﻿using RimWorld;
 using Verse;
-using Harmony;
+using HarmonyLib;
 using System.Reflection;
 
 namespace MassGraves
@@ -9,7 +9,7 @@ namespace MassGraves
     public static class HarmonyLoader {
         static HarmonyLoader()
         {
-            HarmonyInstance.Create("MassGraves.Harmony").PatchAll(Assembly.GetExecutingAssembly());
+            new Harmony("MassGraves.Harmony").PatchAll(Assembly.GetExecutingAssembly());
         }
     }
 

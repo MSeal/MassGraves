@@ -1,22 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <Defs>
-  
-  <ThingDef Name="GraveBuildingBase" Abstract="True">
-    <category>Building</category>
-    <thingClass>Building</thingClass>
-    <soundImpactDefault>BulletImpact_Metal</soundImpactDefault>
-    <selectable>true</selectable>
-    <drawerType>MapMeshAndRealTime</drawerType>
-    <terrainAffordanceNeeded>Light</terrainAffordanceNeeded>
-    <repairEffect>Repair</repairEffect>
-    <leaveResourcesWhenKilled>true</leaveResourcesWhenKilled>
-    <filthLeaving>Filth_RubbleBuilding</filthLeaving>
-    <statBases>
-      <SellPriceFactor>0.70</SellPriceFactor>
-    </statBases>
-  </ThingDef>
 
-  <ThingDef Name="MassGraveBase" ParentName="GraveBuildingBase" Abstract="True">
+  <ThingDef Name="MassGraveBase" ParentName="BuildingBase" Abstract="True">
     <label>mass grave</label>
     <thingClass>MassGraves.Building_MassGrave</thingClass>
     <constructEffect>ConstructDirt</constructEffect>
@@ -44,6 +29,7 @@
         </filter>
       </fixedStorageSettings>
       <defaultStorageSettings>
+        <priority>Important</priority>
         <filter>
           <categories>
             <li>CorpsesHumanlike</li>
@@ -59,6 +45,12 @@
     </inspectorTabs>
     <terrainAffordanceNeeded>Diggable</terrainAffordanceNeeded>
     <designationCategory>Misc</designationCategory>
+    <comps>
+      <li Class="CompProperties_AssignableToPawn">
+        <drawAssignmentOverlay>false</drawAssignmentOverlay>
+        <compClass>CompAssignableToPawn_Grave</compClass>
+      </li>
+    </comps>
   </ThingDef>
 
   <ThingDef ParentName="MassGraveBase">
